@@ -89,6 +89,7 @@ public class JTextArea extends Component implements ActionListener {
 
     public void updateVmess() throws IOException {
         String str = textField.getText();
+        str = rtrim(str);
         String jiemi = DESUtil.decrypt("key986800401ccziwe", str);
         ArrayList<VmessBaen> list = SubConversion.parsingVmess(jiemi);
        // System.out.println(jiemi);
@@ -97,6 +98,11 @@ public class JTextArea extends Component implements ActionListener {
             sb.append(tmp.getSourceVmess());
         }
         jta.setText(String.valueOf(sb));
+    }
+
+    public static String rtrim(String str){
+        if(str==null) return null;
+        return str.replaceAll("\\s+$",""); // 去掉右侧末尾的空格
     }
 
     public static void main(String[] args) throws IOException {
